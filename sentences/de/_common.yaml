@@ -6,24 +6,32 @@ responses:
 
     # Errors for when user is not logged in
     no_area: "Kein Bereich mit dem Namen {{ area }} vorhanden"
+    no_floor: "Keine Etage mit dem Namen {{ floor }} vorhanden"
     no_domain: "Kein {{ domain }} vorhanden"
     no_domain_in_area: "Im Bereich {{ area }} ist kein {{ domain }} vorhanden"
+    no_domain_in_floor: "In der Etage {{ floor }} ist kein {{ domain }} vorhanden"
     no_device_class: "Kein {{ device_class }} vorhanden"
     no_device_class_in_area: "Im Bereich {{ area }} ist kein {{ device_class }} vorhanden"
+    no_device_class_in_floor: "In der Etage {{ floor }} ist kein {{ device_class }} vorhanden"
     no_entity: "{{ entity }} existiert nicht"
     no_entity_in_area: "{{ entity }} ist im Bereich {{ area }} nicht vorhanden"
+    no_entity_in_floor: "{{ entity }} ist in der Etage {{ floor }} nicht vorhanden"
 
     # Errors for when user is logged in and we can give more information
     no_entity_exposed: "{{ entity }} ist nicht freigegeben"
     no_entity_in_area_exposed: "{{ entity }} ist im Bereich {{ area }} nicht freigegeben"
+    no_entity_in_floor_exposed: "{{ entity }} ist in der Etage {{ floor }} nicht freigegeben"
     no_domain_exposed: "Es ist kein {{ domain }} freigegeben"
     no_domain_in_area_exposed: "Im Bereich {{ area }} ist kein {{ domain }} freigegeben"
+    no_domain_in_floor_exposed: "In der Etage {{ floor }} ist kein {{ domain }} freigegeben"
     no_device_class_exposed: "Es ist kein {{ device_class }} freigegeben"
     no_device_class_in_area_exposed: "Im Bereich {{ area }} ist kein {{ device_class }} freigegeben"
+    no_device_class_in_floor_exposed: "In der Etage {{ floor }} ist kein {{ device_class }} freigegeben"
 
     # Used when multiple (exposed) devices have the same name
     duplicate_entities: "Es wurden mehrere {{ entity }} gefunden"
     duplicate_entities_in_area: "Im Bereich {{ area }} wurden mehrere {{ entity }} gefunden"
+    duplicate_entities_in_floor: "In der Etage {{ floor }} wurden mehrere {{ entity }} gefunden"
 
 lists:
   color:
@@ -53,9 +61,9 @@ lists:
       to: 100
   brightness_level:
     values:
-      - in: (max[imale|imum]|höchste|volle)
+      - in: (max[imal[e]|imum]|höchste|volle)
         out: 100
-      - in: (min[imale|imum]|niedrigste)
+      - in: (min[imal[e]|imum]|niedrigste)
         out: 1
   cover_states:
     values:
@@ -137,7 +145,7 @@ lists:
         out: "off"
   bs_carbon_monoxide_states:
     values:
-      - in: "(entdeckt|ausgelöst|erkannt|an)"
+      - in: "<erkannt>"
         out: "on"
       - in: "(klar|rein|sauber|sicher)"
         out: "off"
@@ -167,7 +175,7 @@ lists:
         out: "off"
   bs_gas_states:
     values:
-      - in: "(entdeckt|ausgelöst|erkannt|an)"
+      - in: "<erkannt>"
         out: "on"
       - in: "(klar|rein|sauber|sicher)"
         out: "off"
@@ -177,9 +185,15 @@ lists:
         out: "on"
       - in: "normal"
         out: "off"
+  bs_light_states:
+    values:
+      - in: "<erkannt>"
+        out: "on"
+      - in: "kein Licht"
+        out: "off"
   bs_problem_states:
     values:
-      - in: "erkannt"
+      - in: "<erkannt>"
         out: "on"
       - in: "(ok[ay]|normal)"
         out: "off"
@@ -193,12 +207,37 @@ lists:
   shopping_list_item:
     wildcard: true
 
+  position:
+    range:
+      type: "percentage"
+      from: 0
+      to: 100
+  position_level:
+    values:
+      - in: (max[imal[e]|imum]|höchste)
+        out: 100
+      - in: (min[imal[e]|imum]|niedrigste)
+        out: 1
+
+  volume_level:
+    range:
+      type: "percentage"
+      from: 0
+      to: 100
+  volume_mapping:
+    values:
+      - in: (max[imal[e]|imum]|höchste|volle)
+        out: 100
+      - in: (min[imal[e]|imum]|niedrigste)
+        out: 1
+
 expansion_rules:
   artikel_bestimmt: "[(der|die|das|dem|der|den|des)]"
   artikel_unbestimmt: "[(ein|eine|eines|einer|einem|einen)]"
   artikel: "[<artikel_bestimmt>|<artikel_unbestimmt>]"
   name: "<artikel> {name}"
   area: "[in|an|auf|bei] [<artikel>|im|am|<von_dem>] {area}[s]"
+  floor: "[in|auf] [<artikel>|im|<von_dem>] {floor} [Geschoss]"
   an: "(an|ein|auf)"
   aus: "(aus|ab|zu)"
   auf: "(auf|hoch|rauf|nach oben)"
@@ -244,6 +283,11 @@ expansion_rules:
   co_sensor: "<co>[-]Sensor[en]"
   gas_sensor: "Gas[-]Sensor[en]"
   ding: "((Ding|Gerät)[e|en]|Sensor[en]|Gegenstand|Gegenstände[n])"
+  erkannt: "(entdeckt|ausgelöst|erkannt|an)"
+  ist_wurde: "(ist|wurde)"
+  sind_wurden: "(sind|wurden)"
+  position: "{position} [Prozent|%]"
+  volume: "{volume_level} [Prozent|%]"
 skip_words:
   - "bitte"
   - "danke"

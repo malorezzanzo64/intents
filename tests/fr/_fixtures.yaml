@@ -2,14 +2,24 @@ language: fr
 areas:
   - name: "cuisine"
     id: "kitchen"
+    floor: "Rez-De-Chaussée"
+
   - name: "salon"
     id: "living_room"
+    floor: "Rez-De-Chaussée"
+
   - name: "chambre"
     id: "bedroom"
+    floor: "Premier Étage"
+
   - name: "garage"
     id: "garage"
+    floor: "Rez-De-Chaussée"
+
   - name: "entrée"
     id: "hall"
+    floor: "Rez-De-Chaussée"
+
 entities:
   - name: "lumière du plafond"
     id: "light.bedroom_lamp"
@@ -755,3 +765,23 @@ entities:
   - name: "liste des courses"
     id: "todo.liste_des_courses"
     state: ""
+
+  - name: "valve principale"
+    id: "valve.main_valve"
+    state: "open"
+
+  - name: "TV"
+    id: "media_player.tv"
+    state: "idle"
+    attributes:
+      volume_level: "50"
+
+  - name: "Enceintes"
+    id: "media_player.speakers"
+    state: "idle"
+    attributes:
+      volume_level: "70"
+
+  - name: "Nestor"
+    id: "vacuum.nestor"
+    state: "idle"
