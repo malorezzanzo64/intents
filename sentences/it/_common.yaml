@@ -321,6 +321,12 @@ lists:
       - in: "chius(o|a|e|i)"
         out: "closed"
 
+  position:
+    range:
+      type: "percentage"
+      from: 0
+      to: 100
+
 expansion_rules:
   the: "(l(o|a|e) | i[l] | gli | l'| in | ne(l|llo|lla|lle|ll'|gli) | a[(l|llo|lla|lle|ll'|gli)])"
   in: "(in | ne[i |gli |l[lo |la |le |l'| ]])"
@@ -339,6 +345,7 @@ expansion_rules:
   open: "(apr(i|ire) | alz(a|are))"
   close: "(chiud(i|ere) | abbass(a|are))"
   set: "(impost(a|are) | cambi(a|are) | mett(i|ere) | modific(a|are))"
+  numeric_value_set: "(<set> | [fa('|i|re) ]((alz|aument|increment|abbass)(a|are) | ridu(ci|rre)) | fa('|i|re) (salire|scendere))"
   temperature: "{temperature}[°| gradi] [{temperature_unit}]"
   cover: "(tend(a|e)[ da sole]|serrand(a|e)|tapparell(a|e)|persian(a|e)|port(a|e)|saracinesc(a|he)|venezian(a|e)|cancell(o|i)|finestr(a|e)|oscurant(e|i))"
   climate: "(clima|climatizzator(e|i)|condizionator(e|i)|aria condizionata)"
