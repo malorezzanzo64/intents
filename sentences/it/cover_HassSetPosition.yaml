@@ -3,13 +3,13 @@ intents:
   HassSetPosition:
     data:
       - sentences:
-          - "(<numeric_value_set>|<open>|<close>)[ (la posizione|l'altezza) <of>] <name> (a|su) <position>"
+          - "(<numeric_value_set>|<open>|<close>)[ (la posizione|l'altezza) <of>] <name> ([fino ]a|su) <position>"
         requires_context:
           domain: cover
         slots:
           domain: cover
 
       - sentences:
-          - "[<in> <area> ](<numeric_value_set>|<open>|<close>)[ (la posizione|l'altezza) <of>][ <all>][ <the>] {cover_classes:device_class}[ <in> <area>] (a|su) <position>)"
+          - "[<in> <area> ](<numeric_value_set>|<open>|<close>)[ (la posizione|l'altezza) <of>][ <all>][ <the>] {cover_classes:device_class}[ <in> <area>] ([fino ]a|su) <position>)"
         slots:
           domain: cover
